@@ -1,6 +1,7 @@
 """Entrypoint of CLI."""
 
 import io
+import subprocess
 from pathlib import Path
 from typing import List
 
@@ -48,6 +49,12 @@ def collect_slides(page: Page, url: str) -> List[bytes]:
 def main(url: str, dest: Path):
     """Generate PDF file from URL to DEST."""
     with sync_playwright() as p:
+        if not Path(p.chromium.executable_path).exists():
+            print(
+                "Chromium is not exists on Playwright. Now downloading automatically..."
+            )
+            subprocess.run("playwright install chromium".split())
+
         browser = p.chromium.launch()
         page = browser.new_page()
         slides = collect_slides(page, url)

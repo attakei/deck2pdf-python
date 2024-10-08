@@ -9,6 +9,7 @@ tasks:
     desc: 'Setup workspace'
     cmds:
       - 'uv sync --frozen'
+      - 'uv run playwright install chromium'
   verify:
     desc: 'Verify healthy of local workspace'
     cmds:
