@@ -1,3 +1,3 @@
-Release atsphinx-demo v0.0.0
+Release atsphinx-demo v0.6.0
 
-- Changelog is https://github.com/atsphinx/demo/blob/v0.0.0/CHANGES.rst
+- Changelog is https://github.com/attakei/deck2pdf-python/blob/v0.6.0/CHANGES.rst
