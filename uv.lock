@@ -116,6 +116,18 @@ wheels = [
 ]
 
 [[package]]
+name = "click"
+version = "8.1.7"
+source = { registry = "https://pypi.org/simple" }
+dependencies = [
+    { name = "colorama", marker = "platform_system == 'Windows'" },
+]
+sdist = { url = "https://files.pythonhosted.org/packages/96/d3/f04c7bfcf5c1862a2a5b845c6b2b360488cf47af55dfa79c98f6a6bf98b5/click-8.1.7.tar.gz", hash = "sha256:ca9853ad459e787e2192211578cc907e7594e294c7ccc834310722b41b9ca6de", size = 336121 }
+wheels = [
+    { url = "https://files.pythonhosted.org/packages/00/2e/d53fa4befbf2cfa713304affc7ca780ce4fc1fd8710527771b58311a3229/click-8.1.7-py3-none-any.whl", hash = "sha256:ae74fb96c20a0277a1d615f1e4d73c8414f5a98db8b799a7931d1582f3390c28", size = 97941 },
+]
+
+[[package]]
 name = "colorama"
 version = "0.4.6"
 source = { registry = "https://pypi.org/simple" }
@@ -133,6 +145,8 @@ source = { editable = "." }
 dev = [
     { name = "pytest" },
     { name = "sphinx" },
+    { name = "sphinx-autobuild" },
+    { name = "sphinx-intl" },
 ]
 
 [package.metadata]
@@ -141,6 +155,8 @@ dev = [
 dev = [
     { name = "pytest", specifier = ">=8.3.3" },
     { name = "sphinx", specifier = ">=7.1.2" },
+    { name = "sphinx-autobuild", specifier = ">=2021.3.14" },
+    { name = "sphinx-intl", specifier = ">=2.2.0" },
 ]
 
 [[package]]
@@ -210,6 +226,18 @@ dependencies = [
 sdist = { url = "https://files.pythonhosted.org/packages/ed/55/39036716d19cab0747a5020fc7e907f362fbf48c984b14e62127f7e68e5d/jinja2-3.1.4.tar.gz", hash = "sha256:4a3aee7acbbe7303aede8e9648d13b8bf88a429282aa6122a993f0ac800cb369", size = 240245 }
 wheels = [
     { url = "https://files.pythonhosted.org/packages/31/80/3a54838c3fb461f6fec263ebf3a3a41771bd05190238de3486aae8540c36/jinja2-3.1.4-py3-none-any.whl", hash = "sha256:bc5dd2abb727a5319567b7a813e6a2e7318c39f4f487cfe6c89c6f9c7d25197d", size = 133271 },
+]
+
+[[package]]
+name = "livereload"
+version = "2.7.0"
+source = { registry = "https://pypi.org/simple" }
+dependencies = [
+    { name = "tornado" },
+]
+sdist = { url = "https://files.pythonhosted.org/packages/da/fa/049e6a4aa02c5fe21d053bafddb5c03a551f8c667c0a7399c3ef4aa42d36/livereload-2.7.0.tar.gz", hash = "sha256:f4ba199ef93248902841e298670eebfe1aa9e148e19b343bc57dbf1b74de0513", size = 22143 }
+wheels = [
+    { url = "https://files.pythonhosted.org/packages/b3/51/7a862d416ed2b4dc90ea272e96a439a430bb4ca74ebcccfcc8dab4bac7e3/livereload-2.7.0-py3-none-any.whl", hash = "sha256:19bee55aff51d5ade6ede0dc709189a0f904d3b906d3ea71641ed548acff3246", size = 22530 },
 ]
 
 [[package]]
@@ -339,6 +367,15 @@ wheels = [
 ]
 
 [[package]]
+name = "setuptools"
+version = "75.1.0"
+source = { registry = "https://pypi.org/simple" }
+sdist = { url = "https://files.pythonhosted.org/packages/27/b8/f21073fde99492b33ca357876430822e4800cdf522011f18041351dfa74b/setuptools-75.1.0.tar.gz", hash = "sha256:d59a21b17a275fb872a9c3dae73963160ae079f1049ed956880cd7c09b120538", size = 1348057 }
+wheels = [
+    { url = "https://files.pythonhosted.org/packages/ff/ae/f19306b5a221f6a436d8f2238d5b80925004093fa3edea59835b514d9057/setuptools-75.1.0-py3-none-any.whl", hash = "sha256:35ab7fd3bcd95e6b7fd704e4a1539513edad446c097797f2985e0e4b960772f2", size = 1248506 },
+]
+
+[[package]]
 name = "snowballstemmer"
 version = "2.2.0"
 source = { registry = "https://pypi.org/simple" }
@@ -373,6 +410,35 @@ dependencies = [
 sdist = { url = "https://files.pythonhosted.org/packages/dc/01/688bdf9282241dca09fe6e3a1110eda399fa9b10d0672db609e37c2e7a39/sphinx-7.1.2.tar.gz", hash = "sha256:780f4d32f1d7d1126576e0e5ecc19dc32ab76cd24e950228dcf7b1f6d3d9e22f", size = 6828258 }
 wheels = [
     { url = "https://files.pythonhosted.org/packages/48/17/325cf6a257d84751a48ae90752b3d8fe0be8f9535b6253add61c49d0d9bc/sphinx-7.1.2-py3-none-any.whl", hash = "sha256:d170a81825b2fcacb6dfd5a0d7f578a053e45d3f2b153fecc948c37344eb4cbe", size = 3169543 },
+]
+
+[[package]]
+name = "sphinx-autobuild"
+version = "2021.3.14"
+source = { registry = "https://pypi.org/simple" }
+dependencies = [
+    { name = "colorama" },
+    { name = "livereload" },
+    { name = "sphinx" },
+]
+sdist = { url = "https://files.pythonhosted.org/packages/df/a5/2ed1b81e398bc14533743be41bf0ceaa49d671675f131c4d9ce74897c9c1/sphinx-autobuild-2021.3.14.tar.gz", hash = "sha256:de1ca3b66e271d2b5b5140c35034c89e47f263f2cd5db302c9217065f7443f05", size = 206402 }
+wheels = [
+    { url = "https://files.pythonhosted.org/packages/7e/7d/8fb7557b6c9298d2bcda57f4d070de443c6355dfb475582378e2aa16a02c/sphinx_autobuild-2021.3.14-py3-none-any.whl", hash = "sha256:8fe8cbfdb75db04475232f05187c776f46f6e9e04cacf1e49ce81bdac649ccac", size = 9881 },
+]
+
+[[package]]
+name = "sphinx-intl"
+version = "2.2.0"
+source = { registry = "https://pypi.org/simple" }
+dependencies = [
+    { name = "babel" },
+    { name = "click" },
+    { name = "setuptools" },
+    { name = "sphinx" },
+]
+sdist = { url = "https://files.pythonhosted.org/packages/b4/34/bc0d2332bccc23edffba4cc244a9dd84f86bd13a1fe1ce59cd027a58fdd9/sphinx_intl-2.2.0.tar.gz", hash = "sha256:66976a85d31624dfcb564059a6918f90b31669269bfe3f30b2d72e81f225ab20", size = 23652 }
+wheels = [
+    { url = "https://files.pythonhosted.org/packages/41/b6/766cf7220b257d005f513df0a5a3a031bb5d54ab9e2a29ebe43aa16f4d65/sphinx_intl-2.2.0-py3-none-any.whl", hash = "sha256:56ad5f360fae4aa1cb963448c802f141b55c87223bb32a7b29e936620bd1a381", size = 13557 },
 ]
 
 [[package]]
@@ -436,6 +502,24 @@ source = { registry = "https://pypi.org/simple" }
 sdist = { url = "https://files.pythonhosted.org/packages/35/b9/de2a5c0144d7d75a57ff355c0c24054f965b2dc3036456ae03a51ea6264b/tomli-2.0.2.tar.gz", hash = "sha256:d46d457a85337051c36524bc5349dd91b1877838e2979ac5ced3e710ed8a60ed", size = 16096 }
 wheels = [
     { url = "https://files.pythonhosted.org/packages/cf/db/ce8eda256fa131af12e0a76d481711abe4681b6923c27efb9a255c9e4594/tomli-2.0.2-py3-none-any.whl", hash = "sha256:2ebe24485c53d303f690b0ec092806a085f07af5a5aa1464f3931eec36caaa38", size = 13237 },
+]
+
+[[package]]
+name = "tornado"
+version = "6.4.1"
+source = { registry = "https://pypi.org/simple" }
+sdist = { url = "https://files.pythonhosted.org/packages/ee/66/398ac7167f1c7835406888a386f6d0d26ee5dbf197d8a571300be57662d3/tornado-6.4.1.tar.gz", hash = "sha256:92d3ab53183d8c50f8204a51e6f91d18a15d5ef261e84d452800d4ff6fc504e9", size = 500623 }
+wheels = [
+    { url = "https://files.pythonhosted.org/packages/00/d9/c33be3c1a7564f7d42d87a8d186371a75fd142097076767a5c27da941fef/tornado-6.4.1-cp38-abi3-macosx_10_9_universal2.whl", hash = "sha256:163b0aafc8e23d8cdc3c9dfb24c5368af84a81e3364745ccb4427669bf84aec8", size = 435924 },
+    { url = "https://files.pythonhosted.org/packages/2e/0f/721e113a2fac2f1d7d124b3279a1da4c77622e104084f56119875019ffab/tornado-6.4.1-cp38-abi3-macosx_10_9_x86_64.whl", hash = "sha256:6d5ce3437e18a2b66fbadb183c1d3364fb03f2be71299e7d10dbeeb69f4b2a14", size = 433883 },
+    { url = "https://files.pythonhosted.org/packages/13/cf/786b8f1e6fe1c7c675e79657448178ad65e41c1c9765ef82e7f6f765c4c5/tornado-6.4.1-cp38-abi3-manylinux_2_17_aarch64.manylinux2014_aarch64.whl", hash = "sha256:e2e20b9113cd7293f164dc46fffb13535266e713cdb87bd2d15ddb336e96cfc4", size = 437224 },
+    { url = "https://files.pythonhosted.org/packages/e4/8e/a6ce4b8d5935558828b0f30f3afcb2d980566718837b3365d98e34f6067e/tornado-6.4.1-cp38-abi3-manylinux_2_5_i686.manylinux1_i686.manylinux_2_17_i686.manylinux2014_i686.whl", hash = "sha256:8ae50a504a740365267b2a8d1a90c9fbc86b780a39170feca9bcc1787ff80842", size = 436597 },
+    { url = "https://files.pythonhosted.org/packages/22/d4/54f9d12668b58336bd30defe0307e6c61589a3e687b05c366f804b7faaf0/tornado-6.4.1-cp38-abi3-manylinux_2_5_x86_64.manylinux1_x86_64.manylinux_2_17_x86_64.manylinux2014_x86_64.whl", hash = "sha256:613bf4ddf5c7a95509218b149b555621497a6cc0d46ac341b30bd9ec19eac7f3", size = 436797 },
+    { url = "https://files.pythonhosted.org/packages/cf/3f/2c792e7afa7dd8b24fad7a2ed3c2f24a5ec5110c7b43a64cb6095cc106b8/tornado-6.4.1-cp38-abi3-musllinux_1_2_aarch64.whl", hash = "sha256:25486eb223babe3eed4b8aecbac33b37e3dd6d776bc730ca14e1bf93888b979f", size = 437516 },
+    { url = "https://files.pythonhosted.org/packages/71/63/c8fc62745e669ac9009044b889fc531b6f88ac0f5f183cac79eaa950bb23/tornado-6.4.1-cp38-abi3-musllinux_1_2_i686.whl", hash = "sha256:454db8a7ecfcf2ff6042dde58404164d969b6f5d58b926da15e6b23817950fc4", size = 436958 },
+    { url = "https://files.pythonhosted.org/packages/94/d4/f8ac1f5bd22c15fad3b527e025ce219bd526acdbd903f52053df2baecc8b/tornado-6.4.1-cp38-abi3-musllinux_1_2_x86_64.whl", hash = "sha256:a02a08cc7a9314b006f653ce40483b9b3c12cda222d6a46d4ac63bb6c9057698", size = 436882 },
+    { url = "https://files.pythonhosted.org/packages/4b/3e/a8124c21cc0bbf144d7903d2a0cadab15cadaf683fa39a0f92bc567f0d4d/tornado-6.4.1-cp38-abi3-win32.whl", hash = "sha256:d9a566c40b89757c9aa8e6f032bcdb8ca8795d7c1a9762910c722b1635c9de4d", size = 438092 },
+    { url = "https://files.pythonhosted.org/packages/d9/2f/3f2f05e84a7aff787a96d5fb06821323feb370fe0baed4db6ea7b1088f32/tornado-6.4.1-cp38-abi3-win_amd64.whl", hash = "sha256:b24b8982ed444378d7f21d563f4180a2de31ced9d8d84443907a0a64da2072e7", size = 438532 },
 ]
 
 [[package]]
