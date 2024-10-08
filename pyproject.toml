@@ -5,7 +5,11 @@ description = "Convert from html presentaition to pdf."
 authors = [{name = "Kazuya Takei", email = "myself@attakei.net"}]
 readme = "README.rst"
 requires-python = ">=3.8"
-dependencies = []
+dependencies = [
+    "click>=8",
+    "playwright>=1",
+    "pypdf>=5",
+]
 license = {file = "LICENSE"}
 classefires = [
     "Development Status :: 4 - Beta",
@@ -27,6 +31,9 @@ classefires = [
     "Topic :: Multimedia :: Graphics :: Presentation",
     "Topic :: Utilities",
 ]
+
+[project.scripts]
+deck2pdf = "deck2pdf.cli:main"
 
 [build-system]
 requires = ["hatchling"]
