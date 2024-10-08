@@ -3,7 +3,7 @@ import os
 from deck2pdf import __version__ as version
 
 # -- Project information
-project = "atsphinx-demo"
+project = "deck2pdf"
 copyright = "2024, Kazuya Takei"
 author = "Kazuya Takei"
 release = version
