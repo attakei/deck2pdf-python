@@ -9,6 +9,15 @@ tasks:
     desc: 'Setup workspace'
     cmds:
       - 'uv sync --frozen'
+  verify:
+    desc: 'Verify healthy of local workspace'
+    cmds:
+      - 'uvx pre-commit run --all-files'
+      - 'uv run pytest'
+      - task: 'docs:intl'
+      - task: 'docs:build-linkcheck'
+      - task: 'docs:build-dirhtml'
+      - 'uv build'
   release-*:
     desc: 'Run release process'
     vars:
