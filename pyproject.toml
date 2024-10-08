@@ -34,5 +34,6 @@ build-backend = "hatchling.build"
 
 [tool.uv]
 dev-dependencies = [
+    "pytest>=8.3.3",
     "sphinx>=7.1.2",
 ]
