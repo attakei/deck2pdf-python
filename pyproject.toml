@@ -31,3 +31,8 @@ classefires = [
 [build-system]
 requires = ["hatchling"]
 build-backend = "hatchling.build"
+
+[tool.uv]
+dev-dependencies = [
+    "sphinx>=7.1.2",
+]
