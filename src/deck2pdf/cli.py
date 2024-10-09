@@ -30,7 +30,7 @@ def parse_size(ctx, param, val: Optional[str] = None) -> Optional[Size]:
 def collect_slides(
     page: Page,
     url: str,
-    format: Optional[str] = None,
+    format: str,
     size: Optional[Size] = None,
 ) -> List[bytes]:
     slides = []
@@ -77,7 +77,7 @@ def collect_slides(
 def main(
     url: str,
     dest: Path,
-    format: Optional[str],
+    format: str,
     size: Optional[Size] = None,
 ):
     """Generate PDF file from URL to DEST."""
