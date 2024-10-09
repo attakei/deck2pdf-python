@@ -3,18 +3,15 @@
 import re
 import subprocess
 from pathlib import Path
-from typing import List, Optional, TypedDict
+from typing import List, Optional
 
 import click
 from playwright.sync_api import Page, sync_playwright
 
-from .slides import resolve_slide
+
+from ._types import Size
+from .reader import init_reader
 from .writer import write_pdf
-
-
-class Size(TypedDict):
-    width: int
-    height: int
 
 
 def parse_size(ctx, param, val: Optional[str] = None) -> Optional[Size]:
@@ -29,23 +26,13 @@ def parse_size(ctx, param, val: Optional[str] = None) -> Optional[Size]:
 def collect_slides(
     page: Page,
     url: str,
-    format: str,
-    setup: str,
+    setup: str = "",
+    format: Optional[str] = None,
     size: Optional[Size] = None,
 ) -> List[bytes]:
-    slides = []
-    page.emulate_media(media="screen")
-    page.goto(url)
-    slide_module = resolve_slide(format)
-    operator = slide_module.SlideReader(page, setup, size)
-    operator.setup_slide()
-    while True:
-        content = operator.capture()
-        if slides and slides[-1] == content:
-            break
-        slides.append(content)
-        operator.forward_slide()
-    return slides
+    reader = init_reader(page, url, format, size)
+    reader.setup_slide(setup)
+    return reader.capture_all()
 
 
 @click.command()
@@ -70,8 +57,6 @@ def collect_slides(
 @click.option(
     "--format",
     type=str,
-    required=False,
-    default="generic",
     help="Presentation format (using tool)",
 )
 @click.option(
@@ -83,8 +68,8 @@ def collect_slides(
 def main(
     url: str,
     dest: Path,
-    format: str,
     setup: str,
+    format: Optional[str] = None,
     size: Optional[Size] = None,
 ):
     """Generate PDF file from URL to DEST."""
@@ -97,7 +82,7 @@ def main(
 
         browser = p.chromium.launch()
         page = browser.new_page()
-        slides = collect_slides(page, url, format, setup, size)
+        slides = collect_slides(page, url, setup, format, size)
         browser.close()
 
     write_pdf(dest, slides)

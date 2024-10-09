@@ -1,6 +1,6 @@
 """Abstract module for operator."""
 
-from typing import Optional
+from typing import List, Optional
 from playwright.sync_api import Page, ViewportSize
 
 
@@ -10,11 +10,9 @@ class SlideReaderBase:
     def __init__(
         self,
         page: Page,
-        setup: str,
         size: Optional[ViewportSize] = None,
     ):
         self._page = page
-        self._setup = setup
         if size:
             self._size: ViewportSize = size
 
@@ -26,9 +24,19 @@ class SlideReaderBase:
             print_background=True,
         )
 
-    def setup_slide(self):
+    def capture_all(self) -> List[bytes]:
+        """Fetch all pages as byte-stream."""
+        slides = []
+        while True:
+            content = self.capture()
+            if slides and slides[-1] == content:
+                break
+            slides.append(content)
+            self.forward_slide()
+        return slides
+
+    def setup_slide(self, script: str):
         """Procedure before starting capture."""
-        pass
 
     def forward_slide(self):
         """Forward next slide."""
