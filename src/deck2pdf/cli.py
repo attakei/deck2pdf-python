@@ -9,27 +9,25 @@ import click
 from playwright.sync_api import Page, sync_playwright
 from pypdf import PdfReader, PdfWriter
 
+from .slides import revealjs
+
 
 def collect_slides(page: Page, url: str) -> List[bytes]:
     slides = []
     page.emulate_media(media="screen")
     page.goto(url)
     # NOTE: Works only Reveal.js presentation
-    # NOTE: Optional - Hide component not need for pdf
-    page.evaluate("Reveal.configure({progress: false});")
+    operator = revealjs.SlideOperator(page)
+    operator.setup_slide()
     size = page.viewport_size
     if size is None:
         raise Exception("Viewport is None")
     while True:
-        content = page.pdf(
-            width=str(size["width"]),
-            height=str(size["height"]),
-            print_background=True,
-        )
+        content = operator.capture()
         if slides and slides[-1] == content:
             break
         slides.append(content)
-        page.evaluate("Reveal.next();")
+        operator.forward_slide()
     return slides
 
 
