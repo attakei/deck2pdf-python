@@ -16,6 +16,17 @@ deck2pdf: Convert HTML presentation into PDF file
 
 deck2pdf is converter from your html slide into PDF format keeping slide layout.
 
+Use as CLI only
+===============
+
+.. code:: console
+
+   pipx run deck2pdf https://slides.attakei.net/pyconjp-2022/ output.pdf
+
+.. code:: console
+
+   uvx deck2pdf https://slides.attakei.net/pyconjp-2022/ output.pdf
+
 Getting started
 ===============
 
