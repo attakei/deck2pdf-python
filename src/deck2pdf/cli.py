@@ -37,7 +37,7 @@ def collect_slides(
     page.emulate_media(media="screen")
     page.goto(url)
     slide_module = resolve_slide(format)
-    operator = slide_module.SlideOperator(page, size)
+    operator = slide_module.SlideReader(page, size)
     operator.setup_slide()
     while True:
         content = operator.capture()
