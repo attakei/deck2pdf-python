@@ -1,4 +1,4 @@
-"""Reveal.js operator."""
+"""General slide operator."""
 
 from typing import Optional
 from playwright.sync_api import Page, ViewportSize
@@ -12,10 +12,7 @@ class SlideOperator:
 
     def setup_slide(self):
         """Procedure before capture."""
-        # NOTE: It may be should do as optional.
-        self._page.evaluate("Reveal.configure({progress: false});")
-        if self._page.viewport_size:
-            self._size = self._page.viewport_size
+        pass
 
     def capture(self) -> bytes:
         return self._page.pdf(
@@ -26,4 +23,4 @@ class SlideOperator:
 
     def forward_slide(self):
         """Forward next slide."""
-        self._page.evaluate("Reveal.next();")
+        self._page.keyboard.type(" ")
