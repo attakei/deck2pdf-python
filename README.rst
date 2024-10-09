@@ -44,6 +44,12 @@ Use as CLI
 
    deck2pdf https://slides.attakei.net/pyconjp-2022/ output.pdf
 
+Supporting presentation tools
+=============================
+
+* Reveal.js
+* More generic types that forwards slide by SPACE key.
+
 IMPORTANT
 =========
 
