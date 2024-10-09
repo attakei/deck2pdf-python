@@ -1,6 +1,5 @@
 """Entrypoint of CLI."""
 
-import io
 import re
 import subprocess
 from pathlib import Path
@@ -8,9 +7,9 @@ from typing import List, Optional, TypedDict
 
 import click
 from playwright.sync_api import Page, sync_playwright
-from pypdf import PdfReader, PdfWriter
 
 from .slides import resolve_slide
+from .writer import write_pdf
 
 
 class Size(TypedDict):
@@ -101,9 +100,4 @@ def main(
         slides = collect_slides(page, url, format, setup, size)
         browser.close()
 
-    writer = PdfWriter()
-    for slide in slides:
-        reader = PdfReader(io.BytesIO(slide))
-        writer.add_page(reader.pages[0])
-    writer.write(dest)
-    writer.close()
+    write_pdf(dest, slides)
