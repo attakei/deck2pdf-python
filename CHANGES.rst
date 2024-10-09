@@ -2,6 +2,26 @@
 Change logs
 ===========
 
+v0.7.0
+======
+
+:Date: 2024-10-10 (JST)
+
+Features
+--------
+
+* Add new options
+
+  * ``--size`` is used to specify size of PDF.
+  * ``--format`` is used to specify used presentation tool of html.
+
+* CLI detect format if ``--format`` is not set.
+
+Others
+------
+
+* Add repository url on PyPI.
+
 v0.6.0
 ======
 
