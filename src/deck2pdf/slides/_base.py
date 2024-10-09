@@ -10,9 +10,11 @@ class SlideReaderBase:
     def __init__(
         self,
         page: Page,
+        setup: str,
         size: Optional[ViewportSize] = None,
     ):
         self._page = page
+        self._setup = setup
         if size:
             self._size: ViewportSize = size
 

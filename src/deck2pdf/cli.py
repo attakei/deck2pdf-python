@@ -31,13 +31,14 @@ def collect_slides(
     page: Page,
     url: str,
     format: str,
+    setup: str,
     size: Optional[Size] = None,
 ) -> List[bytes]:
     slides = []
     page.emulate_media(media="screen")
     page.goto(url)
     slide_module = resolve_slide(format)
-    operator = slide_module.SlideReader(page, size)
+    operator = slide_module.SlideReader(page, setup, size)
     operator.setup_slide()
     while True:
         content = operator.capture()
@@ -74,10 +75,17 @@ def collect_slides(
     default="generic",
     help="Presentation format (using tool)",
 )
+@click.option(
+    "--setup",
+    type=str,
+    default="",
+    help="Scripts before starting capture.",
+)
 def main(
     url: str,
     dest: Path,
     format: str,
+    setup: str,
     size: Optional[Size] = None,
 ):
     """Generate PDF file from URL to DEST."""
@@ -90,7 +98,7 @@ def main(
 
         browser = p.chromium.launch()
         page = browser.new_page()
-        slides = collect_slides(page, url, format, size)
+        slides = collect_slides(page, url, format, setup, size)
         browser.close()
 
     writer = PdfWriter()

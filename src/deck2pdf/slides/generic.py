@@ -4,4 +4,5 @@ from ._base import SlideReaderBase
 
 
 class SlideReader(SlideReaderBase):
-    pass
+    def setup_slide(self):
+        self._page.evaluate(self._setup)
