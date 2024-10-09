@@ -43,3 +43,18 @@ Others
 ------
 """
 
+[[files]]
+path = ".github/release-body.md"
+regex = true
+search = """
+Release .+
+
+.+
+.+
+"""
+replace = """
+Release atsphinx-demo v{{new_version}}
+
+- Changelog is https://github.com/attakei/deck2pdf-python/blob/v{{new_version}}/CHANGES.rst
+- Diff is https://github.com/attakei/deck2pdf-python/compare/v{{current_version}}..v{{new_version}}
+"""
