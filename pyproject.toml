@@ -32,6 +32,9 @@ classefires = [
     "Topic :: Utilities",
 ]
 
+[project.urls]
+Repository = "https://github.com/attakei/deck2pdf-python"
+
 [project.scripts]
 deck2pdf = "deck2pdf.cli:main"
 
