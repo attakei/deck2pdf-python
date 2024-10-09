@@ -1,35 +1,51 @@
 """Entrypoint of CLI."""
 
 import io
+import re
 import subprocess
 from pathlib import Path
-from typing import List
+from typing import List, Optional, TypedDict
 
 import click
 from playwright.sync_api import Page, sync_playwright
 from pypdf import PdfReader, PdfWriter
 
+from .slides import resolve_slide
 
-def collect_slides(page: Page, url: str) -> List[bytes]:
+
+class Size(TypedDict):
+    width: int
+    height: int
+
+
+def parse_size(ctx, param, val: Optional[str] = None) -> Optional[Size]:
+    if val is None:
+        return None
+    matched = re.match(r"(?P<width>\d+)x(?P<height>\d+)", val)
+    if matched is None:
+        raise click.BadParameter("Format must be WIDTHxHEIGHT.")
+    return Size(width=int(matched.group("width")), height=int(matched.group("height")))
+
+
+def collect_slides(
+    page: Page,
+    url: str,
+    format: str,
+    setup: str,
+    size: Optional[Size] = None,
+) -> List[bytes]:
     slides = []
     page.emulate_media(media="screen")
     page.goto(url)
-    # NOTE: Works only Reveal.js presentation
-    # NOTE: Optional - Hide component not need for pdf
-    page.evaluate("Reveal.configure({progress: false});")
-    size = page.viewport_size
-    if size is None:
-        raise Exception("Viewport is None")
+    slide_module = resolve_slide(format)
+    operator = slide_module.SlideReader(page, setup, size)
+    operator.setup_slide()
     while True:
-        content = page.pdf(
-            width=str(size["width"]),
-            height=str(size["height"]),
-            print_background=True,
-        )
+        content = operator.capture()
         if slides and slides[-1] == content:
             break
         slides.append(content)
-        page.evaluate("Reveal.next();")
+        operator.forward_slide()
     return slides
 
 
@@ -46,7 +62,32 @@ def collect_slides(page: Page, url: str) -> List[bytes]:
         path_type=Path,
     ),
 )
-def main(url: str, dest: Path):
+@click.option(
+    "--size",
+    type=click.UNPROCESSED,
+    callback=parse_size,
+    help="Pixel size of pdf ([WIDTH]x[HEIGHT] style)",
+)
+@click.option(
+    "--format",
+    type=str,
+    required=False,
+    default="generic",
+    help="Presentation format (using tool)",
+)
+@click.option(
+    "--setup",
+    type=str,
+    default="",
+    help="Scripts before starting capture.",
+)
+def main(
+    url: str,
+    dest: Path,
+    format: str,
+    setup: str,
+    size: Optional[Size] = None,
+):
     """Generate PDF file from URL to DEST."""
     with sync_playwright() as p:
         if not Path(p.chromium.executable_path).exists():
@@ -57,7 +98,7 @@ def main(url: str, dest: Path):
 
         browser = p.chromium.launch()
         page = browser.new_page()
-        slides = collect_slides(page, url)
+        slides = collect_slides(page, url, format, setup, size)
         browser.close()
 
     writer = PdfWriter()
