@@ -49,7 +49,7 @@ jobs:
         if: ${{ matrix.workspace == 'latest'}}
       - name: 'Run tests'
         run: |
-          uv run sphinx-build -M revealjs docs _build
+          uv run sphinx-build -M revealjs docs docs/_build
           uv run pytest
   doc-test:
     runs-on: ubuntu-latest
