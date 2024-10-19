@@ -82,6 +82,9 @@ def main(
 
         browser = p.chromium.launch()
         page = browser.new_page()
+        # TODO: Implement more clearly
+        if not (url.startswith("http://") or url.startswith("https://")):
+            url = "file://" + str(Path(url).resolve())
         slides = collect_slides(page, url, setup, format, size)
         browser.close()
 
