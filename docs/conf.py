@@ -23,5 +23,5 @@ gettext_language_team = "Kazuya Takei <myself@attakei.net>"
 gettext_last_translator = os.environ.get("SPHINXINTL_TRANSLATOR", None)
 
 # -- Options for HTML output
-html_theme = "alabaster"
+html_theme = "sphinx_rtd_theme"
 html_static_path = ["_static"]
