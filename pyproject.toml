@@ -44,8 +44,10 @@ build-backend = "hatchling.build"
 
 [tool.uv]
 dev-dependencies = [
+    "esbonio>=0.16.5",
     "pytest>=8.3.3",
     "sphinx-autobuild>=2021.3.14",
     "sphinx-intl>=2.2.0",
+    "sphinx-rtd-theme>=3.0.1",
     "sphinx>=7.1.2",
 ]
