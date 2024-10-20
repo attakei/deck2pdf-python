@@ -72,7 +72,10 @@ def main(
     format: Optional[str] = None,
     size: Optional[Size] = None,
 ):
-    """Generate PDF file from URL to DEST."""
+    """Generate PDF file from URL to DEST.
+
+    - URL supports http/https and localfile. If this is posix filepath, command convert to 'file://'.
+    """
     with sync_playwright() as p:
         if not Path(p.chromium.executable_path).exists():
             print(
@@ -82,6 +85,9 @@ def main(
 
         browser = p.chromium.launch()
         page = browser.new_page()
+        # TODO: Implement more clearly
+        if not (url.startswith("http://") or url.startswith("https://")):
+            url = "file://" + str(Path(url).resolve())
         slides = collect_slides(page, url, setup, format, size)
         browser.close()
 

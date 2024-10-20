@@ -11,6 +11,7 @@ release = version
 # -- General configuration
 extensions = [
     "sphinx.ext.todo",
+    "sphinx_revealjs",
 ]
 templates_path = ["_templates"]
 exclude_patterns = ["_build", "Thumbs.db", ".DS_Store"]
