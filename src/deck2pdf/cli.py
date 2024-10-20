@@ -72,7 +72,10 @@ def main(
     format: Optional[str] = None,
     size: Optional[Size] = None,
 ):
-    """Generate PDF file from URL to DEST."""
+    """Generate PDF file from URL to DEST.
+
+    - URL supports http/https and localfile. If this is posix filepath, command convert to 'file://'.
+    """
     with sync_playwright() as p:
         if not Path(p.chromium.executable_path).exists():
             print(
