@@ -11,7 +11,7 @@ tasks:
     desc: 'Setup workspace'
     cmds:
       - 'uv sync --frozen'
-      - 'playwright install chromium'
+      - '{{.PYTHONX}} playwright install chromium'
       - '{{.PYTHONX}} pre-commit install'
   verify:
     desc: 'Verify healthy of local workspace'
