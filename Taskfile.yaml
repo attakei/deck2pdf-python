@@ -3,17 +3,20 @@ version: '3'
 vars:
   # If you run bare environment or activated venv, set '' (blank string)
   RUN_PYTHON: 'uv run'
+  # Command to run cli installed of python environment.
+  PYTHONX: 'uvx'
 
 tasks:
   setup:
     desc: 'Setup workspace'
     cmds:
       - 'uv sync --frozen'
-      - 'uv run playwright install chromium'
+      - 'playwright install chromium'
+      - '{{.PYTHONX}} pre-commit install'
   verify:
     desc: 'Verify healthy of local workspace'
     cmds:
-      - 'uvx pre-commit run --all-files'
+      - '{{.PYTHONX}} pre-commit run --all-files'
       - 'uv run pytest'
       - task: 'docs:intl'
       - task: 'docs:build-linkcheck'
