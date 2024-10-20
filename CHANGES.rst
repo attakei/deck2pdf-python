@@ -2,6 +2,16 @@
 Change logs
 ===========
 
+v0.8.0
+======
+
+:Date: 2024-10-21 (JST)
+
+Features
+--------
+
+* Support local filepath as target url.
+
 v0.7.0
 ======
 
