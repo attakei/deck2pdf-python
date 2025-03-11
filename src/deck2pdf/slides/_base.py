@@ -12,6 +12,7 @@ class SlideReaderBase:
         page: Page,
         size: Optional[ViewportSize] = None,
     ):
+        self._slides: list[bytes] = []
         self._page = page
         if size:
             self._size: ViewportSize = size
@@ -26,14 +27,13 @@ class SlideReaderBase:
 
     def capture_all(self) -> List[bytes]:
         """Fetch all pages as byte-stream."""
-        slides = []
         while True:
             content = self.capture()
-            if slides and slides[-1] == content:
+            if self._slides and self._slides[-1] == content:
                 break
-            slides.append(content)
+            self._slides.append(content)
             self.forward_slide()
-        return slides
+        return self._slides
 
     def setup_slide(self, script: str):
         """Procedure before starting capture."""
