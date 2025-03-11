@@ -29,14 +29,21 @@ class SlideReaderBase:
         """Fetch all pages as byte-stream."""
         while True:
             content = self.capture()
-            if self._slides and self._slides[-1] == content:
-                break
             self._slides.append(content)
+            if self.is_last_slide(content):
+                self.post_last_slide()
+                break
             self.forward_slide()
         return self._slides
 
     def setup_slide(self, script: str):
         """Procedure before starting capture."""
+
+    def is_last_slide(self, content: bytes) -> bool:
+        return self._slides[-2] == content
+
+    def post_last_slide(self):
+        self._slides.pop()
 
     def forward_slide(self):
         """Forward next slide."""

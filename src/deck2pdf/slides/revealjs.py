@@ -20,6 +20,12 @@ class SlideReader(SlideReaderBase):
         if self._page.viewport_size:
             self._size = self._page.viewport_size
 
+    def is_last_slide(self, content):
+        return self._page.evaluate("Reveal.isLastSlide();")
+
+    def post_last_slide(self):
+        pass
+
     def forward_slide(self):
         """Forward next slide."""
         self._page.evaluate("Reveal.next();")
