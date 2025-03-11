@@ -28,9 +28,11 @@ class SlideReaderBase:
 
     def capture_all(self) -> List[bytes]:
         """Fetch all pages as byte-stream."""
+        print("Capture ... ", end="")
         while True:
             content = self.capture()
             self._slides.append(content)
+            print(f"\rCapture ... {len(self._slides)} slides.", end="")
             if self.is_last_slide(content):
                 self.post_last_slide()
                 break

@@ -9,6 +9,7 @@ from pypdf import PdfReader, PdfWriter
 
 def write_pdf(out: Path, slides: List[bytes]):
     """Generate PDF file from slides' bytestream."""
+    print(f"Save as {out}")
     writer = PdfWriter()
     for slide in slides:
         reader = PdfReader(io.BytesIO(slide))
