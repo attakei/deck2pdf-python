@@ -1,5 +1,6 @@
 """Abstract module for operator."""
 
+import time
 from typing import List, Optional
 from playwright.sync_api import Page, ViewportSize
 
@@ -33,6 +34,8 @@ class SlideReaderBase:
             if self.is_last_slide(content):
                 self.post_last_slide()
                 break
+            # TODO: Optional?
+            time.sleep(1)
             self.forward_slide()
         return self._slides
 

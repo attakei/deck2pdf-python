@@ -22,6 +22,7 @@ def init_reader(
 ) -> SlideReaderBase:
     page.emulate_media(media="screen")
     page.goto(url)
+    page.wait_for_load_state("load")
     if format is None:
         for c in CANDICATES:
             cm = importlib.import_module(f"..slides.{c}", __name__)
