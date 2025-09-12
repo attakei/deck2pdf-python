@@ -1,7 +1,10 @@
 """Reading core functions."""
 
 import importlib
+import sys
+from pathlib import Path
 from typing import Optional
+
 from playwright.sync_api import Page
 
 from ._types import Size
@@ -28,5 +31,10 @@ def init_reader(
             if cm.resolve_format(page):
                 format = c
                 break
-    module = importlib.import_module(f"..slides.{format}", __name__)
+    if format == "custom":
+        module_path = "custom"
+        sys.path.append(str(Path.cwd()))
+    else:
+        module_path = f"..slides.{format}"
+    module = importlib.import_module(module_path, __name__)
     return module.SlideReader(page, size)
