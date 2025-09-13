@@ -8,6 +8,7 @@ deck2pdf is CLI tool to generate PDF from HTML presentation.
    :maxdepth: 1
 
    usage
+   formats
    changes
 
 Motivation
