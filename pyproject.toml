@@ -1,6 +1,6 @@
 [project]
 name = "deck2pdf"
-version = "0.8.0"
+version = "0.9.0"
 description = "Convert from html presentaition to pdf."
 authors = [{name = "Kazuya Takei", email = "myself@attakei.net"}]
 readme = "README.rst"

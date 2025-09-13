@@ -2,6 +2,16 @@
 Change logs
 ===========
 
+v0.9.0
+======
+
+:Date: 2025/09/13 (Asia/Tokyo)
+
+Features
+--------
+
+* Add ``custom`` type of ``--format`` option.
+
 v0.8.0
 ======
 
